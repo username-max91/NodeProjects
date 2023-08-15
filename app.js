@@ -1,5 +1,11 @@
 const express = require('express')
 const app = express()
+const tasks = require('./routes/tasks.js')
+
+//middleware
+
+app.use(express.json())
+app.use('/api/v1/tasks', tasks)
 
 //routes
 app.get('/hello',(req,res)=>{
