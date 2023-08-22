@@ -6,11 +6,12 @@ const connectDB = require('./db/connect')
 
 //middleware
 
+app.use(express.static('./course materials/03-task-manager/starter/public'))
 app.use(express.json())
-app.use('/api/v1/tasks', tasks)
+
 
 //routes
-
+app.use('/api/v1/tasks', tasks)
 
 //app.patch is used instead of app.put after the update
 

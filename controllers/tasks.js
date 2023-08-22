@@ -7,7 +7,6 @@ const getAllTasks = async (req,res) => {
     } catch (error) {
         res.status(500).json({msg: error}) 
     }
-    res.send('all items from the file')
 }
 
 const postAllTasks = async (req,res) => {
@@ -20,17 +19,43 @@ const postAllTasks = async (req,res) => {
 
 }
 
-const getATask = (req,res) => {
-    res.send('show single task')
+const getATask = async (req,res) => {
+    try {
+        const {id: taskID} = req.params
+        const task = await Task.findOne({_id: taskID})
+        if(!task){
+            return res.status(404).json({msg: `no task with id ${taskID}`})
+        }
+        res.status(200).json({task})
+    } catch (error) {
+        res.status(500).json({msg: error}) 
+    }
 }
 
-const patchATask = (req,res) => {
-    res.send('patch/update a task')
+const patchATask = async (req,res) => {
+    try{
+        const {id: taskID} = req.params;
+        const task = await Task.findOneAndUpdate({_id: taskID}, req.body, {new: true, runValidators: true})
+        if(!task){
+            return res.status(404).json({msg: `id ${taskID} not found`})
+        }
+        res.status(200).json({task})
+    } catch (error) {
+        res.status(500).json({msg: error})
+    }
 }
 
-const deleteATask = (req,res) => {
-    taskNumber = req.params.id
-    res.send(`delete a task ${taskNumber}`)
+const deleteATask = async (req,res) => {
+    try{
+        const {id: taskID} = req.params;
+        const task = await Task.findOneAndDelete({_id: taskID})
+        if(!task){
+            return res.status(404).json({msg: `no task with id ${taskID}`})
+        }
+        res.status(200).json({msg: `deleted task with id ${taskID}`})
+    } catch (error) {
+        res.status(500).json({msg: error})
+    }
 }
 
 module.exports = {
