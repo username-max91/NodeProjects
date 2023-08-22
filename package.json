@@ -7,7 +7,7 @@
     "test": "dev",
     "start": "nodemon app.js"
   },
-  "author": "",
+  "author": "new author",
   "license": "ISC",
   "dependencies": {
     "dotenv": "^8.2.0",

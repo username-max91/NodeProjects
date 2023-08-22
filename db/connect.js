@@ -1,5 +1,12 @@
 const mongoose = require('mongoose')
+require('dotenv').config();
 
-const connectionString = 'mongodb+srv://test:<password>@nodeexpressprojects.5d5zl4w.mongodb.net/StoreTest/?retryWrites=true&w=majority'
+const connectDB = (url) => {
+    return mongoose
+        .connect(url, {
+            useNewUrlParser: true,
+            useUnifiedTopology: true
+        })
+}
 
-mongoose.connect(connectionString)
+module.exports = connectDB;
