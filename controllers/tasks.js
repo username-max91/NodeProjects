@@ -36,6 +36,7 @@ const getATask = asyncWrapper( async (req,res, next) => {
     res.status(200).json({task})
 })
 
+//app.patch is used instead of app.put after the update, it updates the entry instead of rewriting it
 const patchATask = asyncWrapper( async (req,res) => {
     const {id: taskID} = req.params;
     const task = await Task.findOneAndUpdate({_id: taskID}, req.body, {new: true, runValidators: true})

@@ -7,21 +7,19 @@ const notFound = require('./mw/not-found.js')
 const errorHandlerMw = require('./mw/error-handler.js')
 
 //middleware
-
 app.use(express.static('./course materials/03-task-manager/starter/public'))
 app.use(express.json())
 
-
 //routes
 app.use('/api/v1/tasks', tasks)
+
 //adding 404 page middleware
 app.use(notFound)
-
-//app.patch is used instead of app.put after the update
 
 //adding a custom error handler middleware
 app.use(errorHandlerMw)
 
+//port is now set via environment file
 const port = process.env.PORT || 3000
 
 const start = async () => {
@@ -32,5 +30,4 @@ const start = async () => {
         console.log(error)
     }
 }
-
 start()
